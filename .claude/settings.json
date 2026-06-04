@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m py_compile src/shared/models.py src/shared/sse.py src/shared/validation.py src/supervisor/state.py src/supervisor/prompts.py src/agents/clarification.py src/agents/team_assembly.py src/agents/expert_runner.py src/agents/joker.py src/agents/synthesizer.py src/supervisor/graph.py src/api.py src/ollama_deep_researcher/configuration.py)"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    restart: always
+    ports:
+      - "8888:8080"
+    volumes:
+      # Monte le fichier de configuration local pour activer le format JSON
+      - ./searxng:/etc/searxng
+    environment:
+      - SEARXNG_SECRET_KEY=local_deep_research_secret_key
+    networks:
+      - infra-net
+
+  local-deep-researcher:
+    build: .
+    container_name: local-deep-researcher
+    restart: always
+    ports:
+      - "8086:8000"
+    volumes:
+      # Permet de monter le répertoire de travail pour refléter à chaud toute modification
+      - .:/app
+    environment:
+      # Configuration de connexion interne pour le réseau Docker infra-net
+      - LLM_PROVIDER=ollama
+      - OLLAMA_BASE_URL=http://infra-ollama:11434
+      - LOCAL_LLM=qwen3:14b
+      - SEARCH_API=searxng
+      - SEARXNG_URL=http://searxng:8080
+      - MAX_WEB_RESEARCH_LOOPS=3
+      - FETCH_FULL_PAGE=false
+      - STRIP_THINKING_TOKENS=true
+      - USE_TOOL_CALLING=false
+    depends_on:
+      - searxng
+    networks:
+      - infra-net
+
+networks:
+  infra-net:
+    external: true

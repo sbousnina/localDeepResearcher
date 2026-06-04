@@ -1,0 +1,25 @@
+# SearXNG configuration
+# See https://docs.searxng.org/admin/settings.html for details
+
+use_default_settings: true
+
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "local_deep_research_secret_key"
+
+search:
+  safe_search: 0
+  autocomplete: ""
+  # formats requis pour local-deep-researcher (html et json)
+  formats:
+    - html
+    - json
+
+# Optionnel: désactiver les moteurs trop lents ou instables si nécessaire
+engines:
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    timeout: 3.0
+    enable_http: true

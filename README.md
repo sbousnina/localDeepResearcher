@@ -1,6 +1,32 @@
-# Local Deep Researcher
+# Local Deep Researcher — Multi-Agent Expert Team
 
-Local Deep Researcher is a fully local web research assistant that uses any LLM hosted by [Ollama](https://ollama.com/search) or [LMStudio](https://lmstudio.ai/). Give it a topic and it will generate a web search query, gather web search results, summarize the results of web search, reflect on the summary to examine knowledge gaps, generate a new search query to address the gaps, and repeat for a user-defined number of cycles. It will provide the user a final markdown summary with all sources used to generate the summary.
+Local Deep Researcher is a fully local web research assistant powered by a **multi-agent parallel architecture**. It assembles a team of specialized experts, runs their research simultaneously, challenges the results with a Red Team agent, and delivers a structured report with prioritized call-to-actions — designed to fight overthinking and scattering.
+
+## 🧠 How the Multi-Agent System Works
+
+```text
+[Clarification — Grill-Me]  ←  adaptive Q&A until the need is clear
+          ↓  checkpoint
+[Expert Team Assembly]       ←  2-3 experts, each with a methodology + research angle
+          ↓  checkpoint
+  Expert A ║ Expert B ║ Expert C   ← parallel web research loops
+          ↓  fan-in
+[🃏 Red Team Agent]          ←  challenges assumptions, finds blind spots
+          ↓
+[Vision — 3-5 bullets]       ←  strategic direction only
+          ↓  checkpoint
+[Full Report]
+  ✅ Prioritized Call-to-Actions  (🔴 This week / 🟡 This month / 🟢 Backlog)
+  🗓 30/60/90-day roadmap
+  ⛔ Don't-do list  (anti-scatter guard)
+  📚 Consolidated sources
+```
+
+See [docs/multi-agent-architecture.md](docs/multi-agent-architecture.md) for full technical details.
+
+---
+
+> **Classic mode**: The original single-agent deep researcher graph is still available via LangGraph Studio (`langgraph dev`). The multi-agent system runs through the FastAPI endpoint (`src/api.py`) compatible with Open WebUI.
 
 ![ollama-deep-research](https://github.com/user-attachments/assets/1c6b28f8-6b64-42ba-a491-1ab2875d50ea)
 

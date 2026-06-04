@@ -171,7 +171,7 @@ def generate_query(state: SummaryState, config: RunnableConfig):
 
     messages = [
         SystemMessage(
-            content=formatted_prompt + (
+            content=f"{configurable.research_persona}\n\n" + formatted_prompt + (
                 tool_calling_query_instructions if configurable.use_tool_calling 
                 else json_mode_query_instructions
             )
@@ -315,7 +315,7 @@ def summarize_sources(state: SummaryState, config: RunnableConfig):
 
     result = llm.invoke(
         [
-            SystemMessage(content=summarizer_instructions),
+            SystemMessage(content=f"{configurable.research_persona}\n\n" + summarizer_instructions),
             HumanMessage(content=human_message_content),
         ]
     )
@@ -364,7 +364,7 @@ def reflect_on_summary(state: SummaryState, config: RunnableConfig):
 
     messages = [
         SystemMessage(
-            content=formatted_prompt + (
+            content=f"{configurable.research_persona}\n\n" + formatted_prompt + (
                 tool_calling_reflection_instructions if configurable.use_tool_calling 
                 else json_mode_reflection_instructions
             )

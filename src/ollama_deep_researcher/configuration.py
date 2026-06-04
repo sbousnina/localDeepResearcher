@@ -59,6 +59,26 @@ class Configuration(BaseModel):
         title="Use Tool Calling",
         description="Use tool calling instead of JSON mode for structured output",
     )
+    research_persona: str = Field(
+        default="You are an expert research assistant.",
+        title="Research Persona",
+        description="The persona or role profile guiding the search focus and analysis.",
+    )
+    max_experts: int = Field(
+        default=3,
+        title="Max Experts",
+        description="Maximum number of expert agents to run in parallel",
+    )
+    enable_joker: bool = Field(
+        default=True,
+        title="Enable Red Team Agent",
+        description="Run the Red Team / Joker agent to challenge expert analyses",
+    )
+    enable_synthesis: bool = Field(
+        default=True,
+        title="Enable Two-Phase Synthesis",
+        description="Enable vision validation checkpoint before generating the detail report",
+    )
 
     @classmethod
     def from_runnable_config(
